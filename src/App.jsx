@@ -56,7 +56,7 @@ function App() {
                          value={title}
                          onChange={event => setTitle(event.target.value)}
                 />
-                {/*Ссылочный компонент*/}
+                {/*Неконтролируемый (неуправляемый) компонент*/}
                 <MyInput
                     ref={bodyInputRef}
                     type="text"
