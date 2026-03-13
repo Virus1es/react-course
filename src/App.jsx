@@ -4,6 +4,7 @@ import '../styles/app.css';
 import PostList from "./components/PostList.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
 import MyInput from "./components/UI/input/MyInput.jsx";
+import PostForm from "./components/PostForm.jsx";
 
 function App() {
     const [value, setValue] = useState('Some string');
@@ -31,24 +32,7 @@ function App() {
         },
     ])
 
-    const [post, setPost] = useState({
-        title: '',
-        body: ''
-    });
-
-    const addNewPost = (e) => {
-        e.preventDefault();
-
-        setPosts([...posts, {
-            id: Date.now(),
-            ...post
-        }]);
-
-        setPost({
-            title: '',
-            body: ''
-        });
-    };
+    const createPost = (newPost) => setPosts([...posts, newPost]);
 
     return (
         <div className="App">
@@ -58,19 +42,7 @@ function App() {
                    onChange={event => setValue(event.target.value)}
             />
             <Counter/>
-            <form style={{marginTop: '20px'}} action="">
-                <MyInput type="text"
-                         placeholder="Название поста"
-                         value={post.title}
-                         onChange={event => setPost({...post, title: event.target.value})}
-                />
-                <MyInput
-                    value={post.body}
-                    onChange={event => setPost({...post, body: event.target.value})}
-                    type="text"
-                    placeholder="Описание поста"/>
-                <MyButton onClick={addNewPost}>Создать пост</MyButton>
-            </form>
+            <PostForm create={createPost}/>
             <PostList title={'Список постов'} posts={posts}/>
         </div>
     )
