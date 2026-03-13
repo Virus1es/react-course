@@ -14,10 +14,21 @@ function App() {
                    onChange={event => setValue(event.target.value)}
             />
             <Counter/>
-            <PostItem/>
-            <PostItem/>
-            <PostItem/>
-            <PostItem/>
+            <PostItem post={{
+                id: 1,
+                title: 'JavaScript',
+                body: 'JavaScript - язык программирования'
+            }} />
+            <PostItem post={{
+                id: 2,
+                title: 'Java',
+                body: 'Java - язык программирования'
+            }} />
+            <PostItem post={{
+                id: 3,
+                title: 'C#',
+                body: 'C# - язык программирования'
+            }} />
         </div>
     )
 }

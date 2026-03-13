@@ -1,11 +1,11 @@
 import React from 'react';
-const PostItem = () => {
+const PostItem = (props) => {
     return (
         <div className="post">
             <div className="post_content">
-                <strong>1. JavaScript</strong>
+                <strong>{props.post.id}. {props.post.title}</strong>
                 <div>
-                    JavaScript - язык программирования
+                    {props.post.body}
                 </div>
             </div>
             <div className="post__buttons">
