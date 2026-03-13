@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Counter from "./components/Counter.jsx";
 import '../styles/app.css';
 import PostList from "./components/PostList.jsx";
+import MyButton from "./components/UI/button/MyButton.jsx";
 
 function App() {
     const [value, setValue] = useState('Some string');
@@ -37,6 +38,11 @@ function App() {
                    onChange={event => setValue(event.target.value)}
             />
             <Counter/>
+            <form style={{marginTop: '20px'}} action="">
+                <input type="text" placeholder="Название поста"/>
+                <input type="text" placeholder="Описание поста"/>
+                <MyButton>Создать пост</MyButton>
+            </form>
             <PostList title={'Список постов'} posts={posts}/>
         </div>
     )
