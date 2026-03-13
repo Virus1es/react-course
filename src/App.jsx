@@ -45,7 +45,15 @@ function App() {
             />
             <Counter/>
             <PostForm create={createPost}/>
-            <PostList deletePost={deletePost} title={'Список постов'} posts={posts}/>
+            {
+                posts.length !== 0 ?
+                <PostList deletePost={deletePost} title={'Список постов'} posts={posts}/>
+                :
+                    <h2 style={{textAlign: 'center'}}>
+                        Список постов пуст
+                    </h2>
+            }
+
         </div>
     )
 }
