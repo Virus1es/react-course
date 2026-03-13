@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import Counter from "./components/Counter.jsx";
-import '../styles/app.css';
+import './styles/app.css';
 import PostList from "./components/PostList.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
 import MyInput from "./components/UI/input/MyInput.jsx";
