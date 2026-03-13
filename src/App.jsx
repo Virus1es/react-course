@@ -32,13 +32,18 @@ function App() {
     ])
 
     const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
 
-    const bodyInputRef = useRef(null);
 
     const addNewPost = (e) => {
         e.preventDefault();
-        console.log(title);
-        console.log(bodyInputRef.current.value);
+
+        const newPost = {
+            id: Date.now(),
+            title,
+            body
+        };
+        setPosts([...posts, newPost]);
     };
 
     return (
@@ -50,15 +55,14 @@ function App() {
             />
             <Counter/>
             <form style={{marginTop: '20px'}} action="">
-                {/*Управляемый компонент*/}
                 <MyInput type="text"
                          placeholder="Название поста"
                          value={title}
                          onChange={event => setTitle(event.target.value)}
                 />
-                {/*Неконтролируемый (неуправляемый) компонент*/}
                 <MyInput
-                    ref={bodyInputRef}
+                    value={body}
+                    onChange={event => setBody(event.target.value)}
                     type="text"
                     placeholder="Описание поста"/>
                 <MyButton onClick={addNewPost}>Создать пост</MyButton>
