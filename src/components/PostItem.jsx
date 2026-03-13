@@ -1,4 +1,5 @@
 import React from 'react';
+import MyButton from "./UI/button/MyButton.jsx";
 const PostItem = (props) => {
     return (
         <div className="post">
@@ -9,7 +10,9 @@ const PostItem = (props) => {
                 </div>
             </div>
             <div className="post__buttons">
-                <button>Удалить</button>
+                <MyButton onClick={() => props.deletePost(props.post.id)}>
+                    Удалить
+                </MyButton>
             </div>
         </div>
     );

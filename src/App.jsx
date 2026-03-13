@@ -34,6 +34,8 @@ function App() {
 
     const createPost = (newPost) => setPosts([...posts, newPost]);
 
+    const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
+
     return (
         <div className="App">
             <h3>{value}</h3>
@@ -43,7 +45,7 @@ function App() {
             />
             <Counter/>
             <PostForm create={createPost}/>
-            <PostList title={'Список постов'} posts={posts}/>
+            <PostList deletePost={deletePost} title={'Список постов'} posts={posts}/>
         </div>
     )
 }
