@@ -31,6 +31,14 @@ function App() {
         },
     ])
 
+    const [title, setTitle] = useState('');
+
+
+    const addNewPost = (e) => {
+        e.preventDefault();
+        console.log(title);
+    };
+
     return (
         <div className="App">
             <h3>{value}</h3>
@@ -40,9 +48,14 @@ function App() {
             />
             <Counter/>
             <form style={{marginTop: '20px'}} action="">
-                <MyInput type="text" placeholder="Название поста"/>
+                {/*Управляемый компонент*/}
+                <MyInput type="text"
+                         placeholder="Название поста"
+                         value={title}
+                         onChange={event => setTitle(event.target.value)}
+                />
                 <MyInput type="text" placeholder="Описание поста"/>
-                <MyButton>Создать пост</MyButton>
+                <MyButton onClick={addNewPost}>Создать пост</MyButton>
             </form>
             <PostList title={'Список постов'} posts={posts}/>
         </div>
