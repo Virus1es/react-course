@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Counter from "./components/Counter.jsx";
 import '../styles/app.css';
-import PostItem from "./components/PostItem.jsx";
+import PostList from "./components/PostList.jsx";
 
 function App() {
     const [value, setValue] = useState('Some string');
@@ -37,10 +37,7 @@ function App() {
                    onChange={event => setValue(event.target.value)}
             />
             <Counter/>
-            <h1 style={{textAlign: 'center'}}>Список постов</h1>
-            {posts.map(post =>
-                <PostItem post={post} key={post.id}/>
-            )}
+            <PostList title={'Список постов'} posts={posts}/>
         </div>
     )
 }
