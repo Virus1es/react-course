@@ -1,10 +1,18 @@
 import React from 'react';
 import cl from './MyModel.module.css';
+import MyButton from "../button/MyButton.jsx";
 
-const MyModal = ({children}) => {
+const MyModal = ({children, visible, setVisible}) => {
+
+    const rootClasses = [cl.MyModal];
+
+    if(visible) {
+        rootClasses.push(cl.active)
+    }
+
     return (
-        <div className={[cl.MyModal, cl.active].join(' ')}>
-            <div className={cl.MyModalContent}>
+        <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+            <div className={cl.MyModalContent} onClick={e => e.stopPropagation()}>
                 {children}
             </div>
         </div>
