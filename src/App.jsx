@@ -1,9 +1,7 @@
 import React, {useMemo, useState} from "react";
 import './styles/App.css';
 import PostList from "./components/PostList.jsx";
-import MyInput from "./components/UI/input/MyInput.jsx";
 import PostForm from "./components/PostForm.jsx";
-import MySelect from "./components/UI/select/MySelect.jsx";
 import PostFilter from "./components/PostFilter.jsx";
 import MyModal from "./components/UI/modal/MyModal.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
@@ -36,15 +34,7 @@ function App() {
 
     const [modal, setModal] = useState(false);
 
-    const sortedPosts = useMemo(() => {
-        return filter.sort ?
-            [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-            : posts;
-    }, [filter.sort, posts]);
 
-    const sortedAndSearchedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
-    },[filter.query, sortedPosts]);
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
