@@ -5,6 +5,7 @@ import PostForm from "./components/PostForm.jsx";
 import PostFilter from "./components/PostFilter.jsx";
 import MyModal from "./components/UI/modal/MyModal.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
+import {usePosts} from "./hooks/usePosts.js";
 
 function App() {
     const [posts, setPosts] = useState([
@@ -34,7 +35,7 @@ function App() {
 
     const [modal, setModal] = useState(false);
 
-
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
