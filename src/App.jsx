@@ -7,8 +7,6 @@ import PostForm from "./components/PostForm.jsx";
 import MySelect from "./components/UI/select/MySelect.jsx";
 
 function App() {
-    const [value, setValue] = useState('Some string');
-
     const [posts, setPosts] = useState([
         {
             id: 1,
@@ -54,12 +52,6 @@ function App() {
 
     return (
         <div className="App">
-            <h3>{value}</h3>
-            <input type="text"
-                   value={value}
-                   onChange={event => setValue(event.target.value)}
-            />
-            <Counter/>
             <PostForm create={createPost}/>
             <hr style={{margin: '15px 0'}}/>
             <div>
