@@ -25,7 +25,7 @@ const PostForm = ({create}) => {
     };
 
     return (
-        <form style={{marginTop: '20px'}} action="">
+        <form>
             <MyInput type="text"
                      placeholder="Название поста"
                      value={post.title}

@@ -5,6 +5,7 @@ import MyInput from "./components/UI/input/MyInput.jsx";
 import PostForm from "./components/PostForm.jsx";
 import MySelect from "./components/UI/select/MySelect.jsx";
 import PostFilter from "./components/PostFilter.jsx";
+import MyModal from "./components/UI/modal/MyModal.jsx";
 
 function App() {
     const [posts, setPosts] = useState([
@@ -48,10 +49,17 @@ function App() {
 
     return (
         <div className="App">
-            <PostForm create={createPost}/>
+            <MyModal>
+                <PostForm create={createPost}/>
+            </MyModal>
             <hr style={{margin: '15px 0'}}/>
-            <PostFilter filter={filter} setFilter={setFilter}/>
-            <PostList deletePost={deletePost} title={'Список постов'} posts={sortedAndSearchedPosts}/>
+            <PostFilter filter={filter}
+                        setFilter={setFilter}
+            />
+            <PostList deletePost={deletePost}
+                      title={'Список постов'}
+                      posts={sortedAndSearchedPosts}
+            />
         </div>
     )
 }
