@@ -5,6 +5,7 @@ import PostList from "./components/PostList.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
 import MyInput from "./components/UI/input/MyInput.jsx";
 import PostForm from "./components/PostForm.jsx";
+import MySelect from "./components/UI/select/MySelect.jsx";
 
 function App() {
     const [value, setValue] = useState('Some string');
@@ -30,11 +31,18 @@ function App() {
             title: 'C++',
             body: 'C++ - язык программирования'
         },
-    ])
+    ]);
+
+    const [selectedSort, setSelectedSort] = useState('');
 
     const createPost = (newPost) => setPosts([...posts, newPost]);
 
     const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
+
+    const sortPost = (sort) => {
+        setSelectedSort(sort);
+        setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+    }
 
     return (
         <div className="App">
@@ -45,6 +53,18 @@ function App() {
             />
             <Counter/>
             <PostForm create={createPost}/>
+            <hr style={{margin: '15px 0'}}/>
+            <div>
+                <MySelect
+                    value={selectedSort}
+                    onChange={sortPost}
+                    defaultValue="Сортировка"
+                    options={[
+                        {value: 'title', name: 'По названию'},
+                        {value: 'body',  name: 'По описанию'},
+                    ]}
+                />
+            </div>
             {
                 posts.length !== 0 ?
                 <PostList deletePost={deletePost} title={'Список постов'} posts={posts}/>
