@@ -39,6 +39,10 @@ function App() {
         return posts;
     }, [selectedSort, posts]);
 
+    const sortedAndSearchedPosts = useMemo(() => {
+        return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    },[searchQuery, sortedPosts]);
+
     const createPost = (newPost) => setPosts([...posts, newPost]);
 
     const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
@@ -55,7 +59,7 @@ function App() {
                 <MyInput
                     placeholder="Поиск..."
                     value={searchQuery}
-                    onCahnge={e => setSearchQuery(e.target.value)}
+                    onChange={e => setSearchQuery(e.target.value)}
                 />
                 <MySelect
                     value={selectedSort}
@@ -68,8 +72,8 @@ function App() {
                 />
             </div>
             {
-                posts.length !== 0 ?
-                <PostList deletePost={deletePost} title={'Список постов'} posts={sortedPosts}/>
+                sortedAndSearchedPosts.length !== 0 ?
+                <PostList deletePost={deletePost} title={'Список постов'} posts={sortedAndSearchedPosts}/>
                 :
                     <h2 style={{textAlign: 'center'}}>
                         Список постов пуст
