@@ -2,6 +2,14 @@ import React from 'react';
 import PostItem from "./PostItem.jsx";
 
 const PostList = ({deletePost, title, posts}) => {
+    if(!posts.length) {
+        return (
+            <h2 style={{textAlign: 'center'}}>
+                Список постов пуст
+            </h2>
+        );
+    }
+
     return (
         <div>
             <h1 style={{textAlign: 'center'}}>

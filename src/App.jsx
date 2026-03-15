@@ -51,15 +51,7 @@ function App() {
             <PostForm create={createPost}/>
             <hr style={{margin: '15px 0'}}/>
             <PostFilter filter={filter} setFilter={setFilter}/>
-            {
-                sortedAndSearchedPosts.length !== 0 ?
-                <PostList deletePost={deletePost} title={'Список постов'} posts={sortedAndSearchedPosts}/>
-                :
-                    <h2 style={{textAlign: 'center'}}>
-                        Список постов пуст
-                    </h2>
-            }
-
+            <PostList deletePost={deletePost} title={'Список постов'} posts={sortedAndSearchedPosts}/>
         </div>
     )
 }
