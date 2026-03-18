@@ -1,6 +1,5 @@
 import React from 'react';
 import cl from './MyModel.module.css';
-import MyButton from "../button/MyButton.jsx";
 
 const MyModal = ({children, visible, setVisible}) => {
 
