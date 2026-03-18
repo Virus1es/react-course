@@ -9,6 +9,7 @@ import {usePosts} from "./hooks/usePosts.js";
 import axios from "axios";
 import PostService from "./API/PostService.js";
 import Loader from "./components/UI/loader/Loader.jsx";
+import {useFetching} from "./hooks/useFetching.js";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -19,17 +20,13 @@ function App() {
 
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
-    const [isPostsLoading, setIsPostsLoading] = useState(false);
+    const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+        setPosts(await PostService.getAll());
+    });
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
         setModal(false);
-    }
-
-    async function fetchPosts() {
-        setIsPostsLoading(true);
-        setPosts(await PostService.getAll());
-        setIsPostsLoading(false);
     }
 
     useEffect(() => {
@@ -53,6 +50,9 @@ function App() {
             <PostFilter filter={filter}
                         setFilter={setFilter}
             />
+            {postError &&
+                <h1 style={{textAlign: 'center'}}>Произошла ошибка при загрузке данных</h1>
+            }
             {isPostsLoading
                 ?
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
