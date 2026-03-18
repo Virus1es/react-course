@@ -7,6 +7,7 @@ import MyModal from "./components/UI/modal/MyModal.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
 import {usePosts} from "./hooks/usePosts.js";
 import axios from "axios";
+import PostService from "./API/PostService.js";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -17,14 +18,17 @@ function App() {
 
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
+    const [isPostsLoading, setIsPostsLoading] = useState(false);
+
     const createPost = (newPost) => {
         setPosts([...posts, newPost]);
         setModal(false);
     }
 
     async function fetchPosts() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        setPosts(response.data);
+        setIsPostsLoading(true);
+        setPosts(await PostService.getAll());
+        setIsPostsLoading(false);
     }
 
     useEffect(() => {
@@ -48,10 +52,12 @@ function App() {
             <PostFilter filter={filter}
                         setFilter={setFilter}
             />
-            <PostList deletePost={deletePost}
-                      title={'Список постов'}
-                      posts={sortedAndSearchedPosts}
-            />
+            {isPostsLoading ? <h1 style={{textAlign: 'center'}}>Загрузка...</h1>
+                : <PostList deletePost={deletePost}
+                                          title={'Список постов'}
+                                          posts={sortedAndSearchedPosts}
+            />}
+
         </div>
     )
 }
