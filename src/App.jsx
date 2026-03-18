@@ -8,6 +8,7 @@ import MyButton from "./components/UI/button/MyButton.jsx";
 import {usePosts} from "./hooks/usePosts.js";
 import axios from "axios";
 import PostService from "./API/PostService.js";
+import Loader from "./components/UI/loader/Loader.jsx";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -52,11 +53,15 @@ function App() {
             <PostFilter filter={filter}
                         setFilter={setFilter}
             />
-            {isPostsLoading ? <h1 style={{textAlign: 'center'}}>Загрузка...</h1>
+            {isPostsLoading
+                ?
+                <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+                    <Loader/>
+                </div>
                 : <PostList deletePost={deletePost}
-                                          title={'Список постов'}
-                                          posts={sortedAndSearchedPosts}
-            />}
+                            title={'Список постов'}
+                            posts={sortedAndSearchedPosts}/>
+            }
 
         </div>
     )
