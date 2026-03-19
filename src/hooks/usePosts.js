@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 
-export const usePagedPost = (totalPages) => {
+export const usePagination = (totalPages) => {
     return useMemo(() => {
         let pagesArray = [];
 
@@ -12,7 +12,7 @@ export const usePagedPost = (totalPages) => {
     }, [totalPages]);
 }
 
-export const usePagination = (posts, sort) => {
+export const useSortedPost = (posts, sort) => {
     return useMemo(() => {
         return sort ?
             [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
