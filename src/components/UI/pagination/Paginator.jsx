@@ -16,8 +16,8 @@ const Paginator = (props) => {
                             key={p}
                             className={page === p ? 'page page__current' : 'page'}
                         >
-                                {p}
-                            </span>
+                            {p}
+                        </span>
                     )
                 })
             }
