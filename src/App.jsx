@@ -10,6 +10,7 @@ import PostService from "./API/PostService.js";
 import Loader from "./components/UI/loader/Loader.jsx";
 import {useFetching} from "./hooks/useFetching.js";
 import {getPagesCount} from "./utils/pages.js";
+import Paginator from "./components/UI/pagination/Paginator.jsx";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -77,21 +78,10 @@ function App() {
                             title={'Список постов'}
                             posts={sortedAndSearchedPosts}/>
             }
-            <div className="page__wrapper">
-                {
-                    pagesArray.map(p => {
-                        return (
-                            <span
-                                onClick={() => changePage(p)}
-                                key={p}
-                                className={page === p ? 'page page__current' : 'page'}
-                            >
-                                {p}
-                            </span>
-                        )
-                    })
-                }
-            </div>
+            <Paginator
+                pagesArray={pagesArray}
+                changePage={changePage}
+            />
         </div>
     )
 }
