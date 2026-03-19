@@ -51,7 +51,9 @@ function App() {
                         setFilter={setFilter}
             />
             {postError &&
-                <h1 style={{textAlign: 'center'}}>Произошла ошибка при загрузке данных</h1>
+                <h1 style={{textAlign: 'center'}}>
+                    Произошла ошибка при загрузке данных: {postError}
+                </h1>
             }
             {isPostsLoading
                 ?
