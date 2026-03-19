@@ -80,6 +80,7 @@ function App() {
             }
             <Paginator
                 pagesArray={pagesArray}
+                page={page}
                 changePage={changePage}
             />
         </div>

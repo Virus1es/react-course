@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Paginator = (props) => {
-    const { pagesArray, changePage } = props;
+    const { pagesArray, page, changePage } = props;
     return (
         <div className="page__wrapper">
             {
