@@ -12,7 +12,7 @@ export const usePagedPost = (totalPages) => {
     }, [totalPages]);
 }
 
-export const useSortedPost = (posts, sort) => {
+export const usePagination = (posts, sort) => {
     return useMemo(() => {
         return sort ?
             [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
