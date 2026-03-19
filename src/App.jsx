@@ -75,7 +75,21 @@ function App() {
                             title={'Список постов'}
                             posts={sortedAndSearchedPosts}/>
             }
-
+            <div className="page__wrapper">
+                {
+                    pagesArray.map(p => {
+                        return (
+                            <span
+                                onClick={() => setPage(p)}
+                                key={p}
+                                className={page === p ? 'page page__current' : 'page'}
+                            >
+                                {p}
+                            </span>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }
