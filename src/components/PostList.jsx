@@ -31,7 +31,6 @@ const PostList = ({ deletePost, title, posts }) => {
                         <PostItem
                             ref={postsRefs.current[index]}
                             deletePost={deletePost}
-                            number={index + 1}
                             post={post}
                         />
                     </CSSTransition>

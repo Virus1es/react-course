@@ -1,13 +1,17 @@
 import React from 'react';
 import MyButton from "./UI/button/MyButton.jsx";
 
-// Оборачиваем компонент в forwardRef
-const PostItem = React.forwardRef(({ deletePost, number, post }, ref) => {
+const PostItem = React.forwardRef((props, ref) => {
+    const {
+        post,
+        deletePost
+    } = props;
+
     return (
         // Передаём ref в корневой div
         <div className="post" ref={ref}>
             <div className="post_content">
-                <strong>{number}. {post.title}</strong>
+                <strong>{post.id}. {post.title}</strong>
                 <div>
                     {post.body}
                 </div>
