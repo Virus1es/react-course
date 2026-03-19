@@ -5,7 +5,7 @@ import PostForm from "./components/PostForm.jsx";
 import PostFilter from "./components/PostFilter.jsx";
 import MyModal from "./components/UI/modal/MyModal.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
-import {usePagination, usePosts} from "./hooks/usePosts.js";
+import {usePosts} from "./hooks/usePosts.js";
 import PostService from "./API/PostService.js";
 import Loader from "./components/UI/loader/Loader.jsx";
 import {useFetching} from "./hooks/useFetching.js";
@@ -27,7 +27,7 @@ function App() {
 
     const [page, setPage] = useState(1);
 
-    let pagesArray = usePagination(totalPages);
+
 
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll(limit, page);
@@ -79,7 +79,7 @@ function App() {
                             posts={sortedAndSearchedPosts}/>
             }
             <Paginator
-                pagesArray={pagesArray}
+                totalPages={totalPages}
                 page={page}
                 changePage={changePage}
             />

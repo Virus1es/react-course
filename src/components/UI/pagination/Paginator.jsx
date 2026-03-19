@@ -1,7 +1,11 @@
 import React from 'react';
+import {usePagination} from "../../../hooks/usePosts.js";
 
 const Paginator = (props) => {
-    const { pagesArray, page, changePage } = props;
+    const { totalPages, page, changePage } = props;
+
+    let pagesArray = usePagination(totalPages);
+
     return (
         <div className="page__wrapper">
             {
