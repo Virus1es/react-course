@@ -5,11 +5,12 @@ import PostForm from "./components/PostForm.jsx";
 import PostFilter from "./components/PostFilter.jsx";
 import MyModal from "./components/UI/modal/MyModal.jsx";
 import MyButton from "./components/UI/button/MyButton.jsx";
-import {usePosts} from "./hooks/usePosts.js";
+import {usePagedPost, usePosts} from "./hooks/usePosts.js";
 import axios from "axios";
 import PostService from "./API/PostService.js";
 import Loader from "./components/UI/loader/Loader.jsx";
 import {useFetching} from "./hooks/useFetching.js";
+import {getPagesCount} from "./utils/pages.js";
 
 function App() {
     const [posts, setPosts] = useState([]);
@@ -20,16 +21,19 @@ function App() {
 
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
-    const [totalCount, setTotalCount] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     const [limit, setLimit] = useState(10);
 
     const [page, setPage] = useState(1);
 
+    let pagesArray = usePagedPost(totalPages);
+
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
         const response = await PostService.getAll(limit, page);
         setPosts(response.data);
-        setTotalCount(Number(response.headers['x-total-count']));
+        const totalCount = Number(response.headers['x-total-count']);
+        setTotalPages(getPagesCount(totalCount, limit));
     });
 
     const createPost = (newPost) => {
