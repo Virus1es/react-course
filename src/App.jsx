@@ -20,8 +20,16 @@ function App() {
 
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
+    const [totalCount, setTotalCount] = useState(0);
+
+    const [limit, setLimit] = useState(10);
+
+    const [page, setPage] = useState(1);
+
     const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
-        setPosts(await PostService.getAll());
+        const response = await PostService.getAll(limit, page);
+        setPosts(response.data);
+        setTotalCount(Number(response.headers['x-total-count']));
     });
 
     const createPost = (newPost) => {
