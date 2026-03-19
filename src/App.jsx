@@ -42,9 +42,11 @@ function App() {
 
     useEffect(() => {
         void fetchPosts();
-    }, []);
+    }, [page]);
 
     const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
+
+    const changePage = (page) => setPage(page);
 
     return (
         <div className="App">
@@ -80,7 +82,7 @@ function App() {
                     pagesArray.map(p => {
                         return (
                             <span
-                                onClick={() => setPage(p)}
+                                onClick={() => changePage(p)}
                                 key={p}
                                 className={page === p ? 'page page__current' : 'page'}
                             >
