@@ -7,6 +7,12 @@ import About from "./pages/About.jsx";
 function App() {
     return (
         <BrowserRouter>
+            <div className="navbar">
+                <div className="navbar__links">
+                    <a href="/about">О сайте</a>
+                    <a href="/posts">Посты</a>
+                </div>
+            </div>
             <Routes>
                 <Route path="posts" element={<Posts/>}/>
                 <Route path="about" element={<About/>}/>
