@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import './styles/App.css';
-import PostList from "./components/PostList.jsx";
-import PostForm from "./components/PostForm.jsx";
-import PostFilter from "./components/PostFilter.jsx";
-import MyModal from "./components/UI/modal/MyModal.jsx";
-import MyButton from "./components/UI/button/MyButton.jsx";
-import {usePosts} from "./hooks/usePosts.js";
-import PostService from "./API/PostService.js";
-import Loader from "./components/UI/loader/Loader.jsx";
-import {useFetching} from "./hooks/useFetching.js";
-import {getPagesCount} from "./utils/pages.js";
-import Paginator from "./components/UI/pagination/Paginator.jsx";
+import PostList from "../components/PostList.jsx";
+import PostForm from "../components/PostForm.jsx";
+import PostFilter from "../components/PostFilter.jsx";
+import MyModal from "../components/UI/modal/MyModal.jsx";
+import MyButton from "../components/UI/button/MyButton.jsx";
+import {usePosts} from "../hooks/usePosts.js";
+import PostService from "../API/PostService.js";
+import Loader from "../components/UI/loader/Loader.jsx";
+import {useFetching} from "../hooks/useFetching.js";
+import {getPagesCount} from "../utils/pages.js";
+import Paginator from "../components/UI/pagination/Paginator.jsx";
 
 function Posts() {
     const [posts, setPosts] = useState([]);
