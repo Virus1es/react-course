@@ -12,6 +12,7 @@ import {useFetching} from "../hooks/useFetching.js";
 import {getPagesCount} from "../utils/pages.js";
 import Paginator from "../components/UI/pagination/Paginator.jsx";
 import {useObserver} from "../hooks/useObserver.js";
+import MySelect from "../components/UI/select/MySelect.jsx";
 
 function Posts() {
     const [posts, setPosts] = useState([]);
@@ -51,7 +52,7 @@ function Posts() {
 
     useEffect(() => {
         void fetchPosts(limit, page);
-    }, [page]);
+    }, [page, limit]);
 
     const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
 
@@ -71,6 +72,16 @@ function Posts() {
             <hr style={{margin: '15px 0'}}/>
             <PostFilter filter={filter}
                         setFilter={setFilter}
+            />
+            <MySelect value={limit}
+                      onChange={value => setLimit(value)}
+                      defaultValue="Кол-во элементов на странице"
+                      options={[
+                          {value: 5,  name: '5'},
+                          {value: 10, name: '10'},
+                          {value: 25, name: '25'},
+                          {value: -1, name: 'Все посты'},
+                      ]}
             />
             {postError &&
                 <h1 style={{textAlign: 'center'}}>
