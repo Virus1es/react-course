@@ -1,11 +1,14 @@
 import React from 'react';
 import MyButton from "./UI/button/MyButton.jsx";
+import {useNavigate} from "react-router-dom";
 
 const PostItem = React.forwardRef((props, ref) => {
     const {
         post,
         deletePost
     } = props;
+
+    const router = useNavigate();
 
     return (
         // Передаём ref в корневой div
@@ -17,6 +20,9 @@ const PostItem = React.forwardRef((props, ref) => {
                 </div>
             </div>
             <div className="post__buttons">
+                <MyButton onClick={() => router(`/post/${post.id}`)}>
+                    Открыть
+                </MyButton>
                 <MyButton onClick={() => deletePost(post.id)}>
                     Удалить
                 </MyButton>
