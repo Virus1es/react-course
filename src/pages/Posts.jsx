@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import '../styles/App.css';
 import PostList from "../components/PostList.jsx";
 import PostForm from "../components/PostForm.jsx";
@@ -25,11 +25,15 @@ function Posts() {
 
     const [limit, setLimit] = useState(10);
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
 
-    const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+    const lastElement = useRef(null);
+
+    const observer = useRef(null);
+
+    const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
         const response = await PostService.getAll(limit, page);
-        setPosts(response.data);
+        setPosts([...posts, ...response.data]);
         const totalCount = Number(response.headers['x-total-count']);
         setTotalPages(getPagesCount(totalCount, limit));
     });
@@ -40,7 +44,22 @@ function Posts() {
     }
 
     useEffect(() => {
-        void fetchPosts();
+        if(isPostsLoading) return;
+
+        if(observer.current) observer.current.disconnect();
+
+        const callback = function (entries, observer) {
+            if (entries[0].isIntersecting && page < totalPages) {
+                setPage(page + 1);
+            }
+        }
+
+        observer.current = new IntersectionObserver(callback);
+        observer.current.observe(lastElement.current);
+    }, [isPostsLoading])
+
+    useEffect(() => {
+        void fetchPosts(limit, page);
     }, [page]);
 
     const deletePost = (postId) => setPosts(posts.filter(post => post.id !== postId));
@@ -67,20 +86,21 @@ function Posts() {
                     Произошла ошибка при загрузке данных: {postError}
                 </h1>
             }
-            {isPostsLoading
-                ?
+            <PostList deletePost={deletePost}
+                      title={'Список постов'}
+                      posts={sortedAndSearchedPosts}
+            />
+            <div ref={lastElement} style={{height: '20px'}}></div>
+            {isPostsLoading &&
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
                     <Loader/>
                 </div>
-                : <PostList deletePost={deletePost}
-                            title={'Список постов'}
-                            posts={sortedAndSearchedPosts}/>
             }
-            <Paginator
-                totalPages={totalPages}
-                page={page}
-                changePage={changePage}
-            />
+            {/*<Paginator*/}
+            {/*    totalPages={totalPages}*/}
+            {/*    page={page}*/}
+            {/*    changePage={changePage}*/}
+            {/*/>*/}
         </div>
     )
 }
