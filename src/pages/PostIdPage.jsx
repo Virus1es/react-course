@@ -3,17 +3,26 @@ import {useParams} from "react-router-dom";
 import {useFetching} from "../hooks/useFetching.js";
 import PostService from "../API/PostService.js";
 import Loader from "../components/UI/loader/Loader.jsx";
+import Comments from "../components/Comments.jsx";
 
 const PostIdPage = () => {
     const params = useParams();
     const [post, setPost] = useState({});
+    const [comments, setComments] = useState([]);
+
     const [fetchPostById, isLoading, error] = useFetching(async (id) => {
         const response = await PostService.getById(id);
         setPost(response.data);
     });
 
+    const [fetchComments, isComLoading, comError] = useFetching(async (id) => {
+        const response = await PostService.getCommentsByPostId(id);
+        setComments(response.data);
+    });
+
     useEffect(() => {
-        fetchPostById(params.id);
+        void fetchPostById(params.id);
+        void fetchComments(params.id);
     }, []);
 
     return (
@@ -25,6 +34,12 @@ const PostIdPage = () => {
                     {post.id}. {post.title}
                 </div>
             }
+            <section>
+                <h2>Комментарии:</h2>
+                <Comments isLoading={isComLoading}
+                          comments={comments}
+                />
+            </section>
         </div>
     );
 };
