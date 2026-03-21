@@ -20,7 +20,7 @@ const PostItem = React.forwardRef((props, ref) => {
                 </div>
             </div>
             <div className="post__buttons">
-                <MyButton onClick={() => router(`/post/${post.id}`)}>
+                <MyButton onClick={() => router(`/posts/${post.id}`)}>
                     Открыть
                 </MyButton>
                 <MyButton onClick={() => deletePost(post.id)}>
