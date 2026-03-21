@@ -4,14 +4,19 @@ import Posts from "../pages/Posts.jsx";
 import About from "../pages/About.jsx";
 import Error from "../pages/Error.jsx";
 import PostIdPage from "../pages/PostIdPage.jsx";
+import {routes} from "../router/routes.js";
 
 const AppRouter = () => {
     return (
         <Routes>
-            <Route path="posts" element={<Posts/>}/>
-            <Route path="posts/:id" element={<PostIdPage/>}/>
-            <Route path="about" element={<About/>}/>
-            <Route path="*" element={<Error/>}/>
+            <Route path="/" element={<Posts/>}/>
+            {routes.map((route, index) =>
+                <Route
+                    key={index}
+                    path={route.path}
+                    element={<route.element/>}
+                />
+            )}
         </Routes>
     );
 };

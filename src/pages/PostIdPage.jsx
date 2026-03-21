@@ -34,7 +34,7 @@ const PostIdPage = () => {
                     {post.id}. {post.title}
                 </div>
             }
-            <section>
+            <section style={{marginTop: '15px'}}>
                 <h2>Комментарии:</h2>
                 <Comments isLoading={isComLoading}
                           comments={comments}
