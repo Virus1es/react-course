@@ -4,9 +4,14 @@ import Posts from "../pages/Posts.jsx";
 import {privateRoutes, publicRoutes} from "../router/routes.js";
 import Login from "../pages/Login.jsx";
 import {AuthContext} from "../context/index.js";
+import Loader from "./UI/loader/Loader.jsx";
 
 const AppRouter = () => {
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth, isLoading} = useContext(AuthContext);
+
+    if (isLoading) {
+        return <Loader/>
+    }
 
     return (
         isAuth ?
